@@ -1,0 +1,30 @@
+{
+  "name": "frontend-security-lab",
+  "version": "1.0.0",
+  "description": "Учебный стенд: XSS, CSRF и SQL-инъекции через клиентский ввод + Content Security Policy",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "attacker": "node attacker/server.js",
+    "seed": "node src/db.js --seed",
+    "test": "node --test tests/"
+  },
+  "keywords": [
+    "security",
+    "xss",
+    "csrf",
+    "sql-injection",
+    "csp",
+    "education"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.0"
+  }
+}

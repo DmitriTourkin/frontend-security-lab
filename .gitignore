@@ -1,0 +1,10 @@
+node_modules/
+*.db
+*.db-journal
+.DS_Store
+.env
+npm-debug.log*
+
+# Посторонние проекты, не относящиеся к учебному стенду
+ts-strict-migration/
+ts-strict-migration-mentor/
