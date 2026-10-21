@@ -25,7 +25,7 @@
 | `docs/INSTRUCTION.md` | **Пошаговая инструкция по выполнению проекта.** |
 | `docs/TASKS.md` | Задания с подсказками по каждой уязвимости. |
 | `docs/VULNERABILITIES.md` | Шаблон отчёта об уязвимостях (заполняет студент). |
-| `SOLUTION.md` | Эталонные исправления (для самопроверки). |
+| `docs/GRADING.md` | **Критерии оценки: уровни Б / П / Э.** |
 
 ## Карта уязвимостей
 
@@ -38,6 +38,37 @@
 | 5 | DOM-based XSS | `public/profile.js` | `textContent` вместо `innerHTML` |
 | 6 | Stored/Reflected XSS | рендер сообщений, `src/server.js` | экранирование вывода `esc()` |
 | 7 | Нет CSP | заголовки ответа | `Content-Security-Policy` |
+
+---
+
+## Инструменты и материалы
+
+**Что используется в проекте** (всё ставится одной командой `npm install`,
+отдельно скачивать ничего не нужно):
+
+- [Node.js](https://nodejs.org/) ≥ 18 — среда выполнения JavaScript.
+- [Express](https://expressjs.com/ru/) — веб-фреймворк (маршруты, запросы).
+- [better-sqlite3](https://github.com/WiseLibs/better-sqlite3) — встроенная
+  база данных SQLite (на ней показаны SQL-инъекции и их исправление).
+- [cookie-parser](https://github.com/expressjs/cookie-parser) — чтение cookie.
+- [node:test](https://nodejs.org/api/test.html) — встроенный тест-раннер
+  Node.js (автотесты, без сторонних зависимостей).
+
+**Справочные материалы** (рекомендуется держать под рукой):
+
+- OWASP Top 10 — обзор классов уязвимостей:
+  <https://owasp.org/www-project-top-ten/>
+- Шпаргалки OWASP по защите:
+  [XSS](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html) ·
+  [CSRF](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html) ·
+  [SQL Injection](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
+- MDN:
+  [Content-Security-Policy](https://developer.mozilla.org/ru/docs/Web/HTTP/CSP) ·
+  [Set-Cookie (HttpOnly, SameSite)](https://developer.mozilla.org/ru/docs/Web/HTTP/Headers/Set-Cookie)
+- Классификация CWE:
+  [CWE-79 (XSS)](https://cwe.mitre.org/data/definitions/79.html) ·
+  [CWE-89 (SQLi)](https://cwe.mitre.org/data/definitions/89.html) ·
+  [CWE-352 (CSRF)](https://cwe.mitre.org/data/definitions/352.html)
 
 ---
 
@@ -106,3 +137,18 @@ npm test
 - Исправленное приложение, проходящее `npm test`.
 - Заполненный отчёт `docs/VULNERABILITIES.md`.
 - Видеоотчёт с демонстрацией атак до и после исправления.
+
+## Как оценивается
+
+Работа оценивается по уровням **Б** (базовый), **П** (продвинутый) и
+**Э** (экспертный) — они позже переводятся в числовые баллы. Уровни
+накопительные: сначала базовый, затем усиление.
+
+| Уровень | Коротко |
+|---------|---------|
+| **Б** | Все 7 уязвимостей закрыты, `npm test` зелёный, CSP работает, отчёт и видео сданы. |
+| **П** | Базовый уровень + «боевые» практики: хэширование паролей, ужесточённая CSP с приёмом отчётов, собственные тесты, CWE в отчёте. |
+| **Э** | Продвинутый уровень + системная защита: безопасность по умолчанию, CSP на nonce/Trusted Types, security-тесты в CI, аналитическая записка. |
+
+Полные критерии со всеми пунктами и градациями (Б−, Б, Б+) —
+в [docs/GRADING.md](docs/GRADING.md).
